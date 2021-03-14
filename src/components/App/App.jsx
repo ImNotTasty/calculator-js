@@ -13,15 +13,19 @@ const App = () => {
 
   const addToHistory = (equtionToAdd) => {
     if (equtionToAdd.isValidEquation()) {
-      const updatedHistory = [...history, equtionToAdd];
-      setHistory(updatedHistory);
-    }
+      setHistory((oldHistory) => {
+      const updatedHistory = [...oldHistory, equtionToAdd];
+     return updatedHistory
+    })}
   };
 
-  useEffect(() => {
-    setTimeout(() => {
+useEffect(() => {
+    const timeout = setTimeout(() => {
       setIsWelcomeOver(true);
-    }, timeForWelcome);
+    }, timeForWelcome);         
+    return () => {
+      clearTimeout(timeout)
+    }
   });
 
   let app;
